@@ -8,6 +8,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous"/>
     <!-- Main style -->
@@ -16,7 +19,6 @@
 </head>
 <body>
     <div id="app" class="wrapper">
-
         <header class="flex">
             <!-- Logo -->
             <div class="logo-container">
@@ -25,15 +27,25 @@
 
             <!-- Search-bar -->
             <div class="input-button-container flex">
-                <input type="text" placeholder="Search a Movie">
-                <button><i class="far fa-arrow-alt-circle-right"></i></button>
+                <input type="text" placeholder="Search" v-model="userInput" @keyup.enter="search()">
+                <button @click="search()"><i class="far fa-arrow-alt-circle-right"></i></button>
             </div>
         </header>
 
-        <main class="">
+        <main class="flex">
+            <!-- Cards section -->
+            <div class="card-container" v-for="movie in movies">
+                <img class="to-hide" :src="'https://image.tmdb.org/t/p/w300' + movie.poster_path" :alt="movie.title">
 
+                <!-- Card info on :hover -->
+                <div class="card-data flex">
+                    <p><span class="color-red">Title:</span> {{movie.original_title}}</p>
+                    <p><span class="color-red">Synopsis:</span> {{movie.overview}}</p>
+                    <p><span class="color-red">Released on:</span> {{movie.release_date}}</p>
+                    <p></p>
+                </div>
+            </div>
         </main>
-
     </div>
 
     <!-- Main JS file -->
