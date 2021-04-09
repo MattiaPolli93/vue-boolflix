@@ -35,12 +35,13 @@
         <main class="flex">
             <!-- Cards section -->
             <div class="card-container" v-for="movie in movies">
-                <img class="to-hide" :src="'https://image.tmdb.org/t/p/w300' + movie.poster_path" :alt="movie.title">
+                <img :src="'https://image.tmdb.org/t/p/w300' + movie.poster_path" :alt="movie.title">
 
                 <!-- Card info on :hover -->
                 <div class="card-data flex">
                     <p><span class="color-red">Title:</span> {{movie.original_title}}</p>
                     <p><span class="color-red">Synopsis:</span> {{movie.overview}}</p>
+                    <p><span class="color-red">Rating:</span> {{movie.vote_average}}</p>
                     <p><span class="color-red">Released on:</span> {{movie.release_date}}</p>
                     <p></p>
                 </div>
