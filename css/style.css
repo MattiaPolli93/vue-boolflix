@@ -4,3 +4,48 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.wrapper {
+    height: 100vh;
+    background-color: #141414;
+}
+
+.flex {
+    display: flex;
+}
+
+/* Header */
+header {
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    background-color: #000;
+    padding: 15px 30px;
+}
+
+.logo-container img {
+    height: 55px;
+}
+
+.input-button-container {
+    justify-content: space-around;
+    width: 15%;
+}
+
+.input-button-container input {
+    padding-left: 5px;
+}
+
+.input-button-container button{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.input-button-container input,
+.input-button-container button {
+    border: none;
+    cursor: pointer;
+}
+
+/* Main */
