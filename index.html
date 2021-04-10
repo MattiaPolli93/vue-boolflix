@@ -33,17 +33,32 @@
         </header>
 
         <main class="flex">
-            <!-- Cards section -->
-            <div class="card-container" v-for="movie in movies">
-                <img :src="'https://image.tmdb.org/t/p/w300' + movie.poster_path" :alt="movie.title">
+            <!-- Cards section - Movies & TV series -->
+            <div class="card-container" v-for="title in tvTitles">
+                <img class="to-hide ":src="'https://image.tmdb.org/t/p/w300' + title.poster_path" :alt="title.title">
 
                 <!-- Card info on :hover -->
-                <div class="card-data flex">
-                    <p><span class="color-red">Title:</span> {{movie.original_title}}</p>
-                    <p><span class="color-red">Synopsis:</span> {{movie.overview}}</p>
-                    <p><span class="color-red">Rating:</span> {{movie.vote_average}}</p>
-                    <p><span class="color-red">Released on:</span> {{movie.release_date}}</p>
-                    <p></p>
+                <div class="card-data flex">                  
+                    <!-- Title name -->
+                    <p v-if="title.original_title && title.original_title !== title.original_name"><span class="color-red">Title: </span>{{title.original_title}}</p>               
+                    <p v-else><span class="color-red">Title: </span>{{title.original_name}}</p>
+                    
+                    <!-- Flag/Language -->
+                    <div class="flag flex">
+                        <p><span class="color-red">Language: </span></p>
+                        <img v-if="flags.includes(title.original_language)" :src="displayFlags(title.original_language)" alt="Flag">
+                        <img v-else src="img/flags/image-not-found.svg" alt="Image Not Found!">
+                    </div>          
+                        
+                    <!-- Overview -->
+                    <p><span class="color-red">Synopsis: </span>{{title.overview}}</p>
+                    
+                    <!-- Rating -->
+                    <p><span class="color-red">Rating: </span>{{title.vote_average}}</p>
+                    
+                    <!-- Release date -->
+                    <p v-if="title.release_date && title.release_date !== title.first_air_date"><span class="color-red">Released on:</span> {{title.release_date}}</p>
+                    <p v-else><span class="color-red">Released on:</span> {{title.first_air_date}}</p>
                 </div>
             </div>
         </main>
