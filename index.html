@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Vue.js -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <!-- Axios -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
@@ -15,6 +11,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous"/>
     <!-- Main style -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Boolflix</title>
 </head>
 <body>
@@ -35,7 +35,7 @@
         <main class="flex">
             <!-- Cards section - Movies & TV series -->
             <div class="card-container" v-for="title in tvTitles">
-                <img class="to-hide ":src="'https://image.tmdb.org/t/p/w300' + title.poster_path" :alt="title.title">
+                <img class="to-hide ":src="'https://image.tmdb.org/t/p/w500' + title.poster_path" :alt="title.title">
 
                 <!-- Card info on :hover -->
                 <div class="card-data flex">                  
@@ -58,7 +58,7 @@
                     
                     <!-- Release date -->
                     <p v-if="title.release_date && title.release_date !== title.first_air_date"><span class="color-red">Released on:</span> {{title.release_date}}</p>
-                    <p v-else><span class="color-red">Released on:</span> {{title.first_air_date}}</p>
+                    <p v-else><span class="color-red">Released on: </span>{{title.first_air_date}}</p>
                 </div>
             </div>
         </main>

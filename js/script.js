@@ -1,9 +1,11 @@
 "use strict";
 
+// Base URL
+const baseUrl = "https://api.themoviedb.org/3/search/"
 // API Key
 const apiKey = "837fe6873adf73088b3b213a4902260e";
 // Flags
-const flagSeries = ["de", "en", "es", "fr", "it", "ja", "nl", "pt", "ru"];
+const flagSeries = ["de", "en", "es", "fr", "it", "ja", "nl", "pl", "pt", "ru"];
 
 const app = new Vue({
     el: "#app",
@@ -16,7 +18,7 @@ const app = new Vue({
         // Method to search Movies and TV series
         search() {
             // Movies
-            axios.get("https://api.themoviedb.org/3/search/movie?", {
+            axios.get(baseUrl + "movie", {
                 params: {
                     api_key: apiKey,
                     query: this.userInput
@@ -26,7 +28,7 @@ const app = new Vue({
             });
 
             // TV series
-            axios.get("https://api.themoviedb.org/3/search/tv?", {
+            axios.get(baseUrl + "tv", {
                 params: {
                     api_key: apiKey,
                     query: this.userInput
