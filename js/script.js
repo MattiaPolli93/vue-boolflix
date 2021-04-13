@@ -9,7 +9,7 @@ const app = new Vue({
         tvTitles: [],
         flags: ["de", "en", "es", "fr", "it", "ja", "ko", "nl", "pl", "pt", "ru", "zh"],
         maxRating: 5,
-        navSections: ["Home", "Movies", "TV Series"],
+        navSections: ["Home", "Trending", "Movies", "TV Series", "Discover"],
         sectionSelected: "Home"
     },
     methods: {
@@ -39,10 +39,18 @@ const app = new Vue({
             this.userInput = "";
         },
         // Method to display daily trending Movies & TV series
-        trending() {
+        trendingDaily() {
             axios.get(this.baseUrl + "trending/all/day", {
                 params: {
-                    api_key: this.apiKey,
+                    api_key: this.apiKey
+                }
+            }).then((response) => this.tvTitles = response.data.results);
+        },
+        // Method to display weekly trending Movies & TV series
+        trendingWeekly() {
+            axios.get(this.baseUrl + "trending/all/week", {
+                params: {
+                    api_key: this.apiKey                    
                 }
             }).then((response) => this.tvTitles = response.data.results);
         },
@@ -62,6 +70,23 @@ const app = new Vue({
                 }
             }).then((response) => this.tvTitles = response.data.results);
         },
+        // Method to display the "Discover" section
+        discoverTitles() {
+            // Movies
+            axios.get(this.baseUrl + "discover/movie", {
+                params: {
+                    api_key: this.apiKey
+                }
+            }).then((response) => this.tvTitles = response.data.results);
+
+            // TV series
+            axios.get(this.baseUrl + "discover/tv", {
+                params: {
+                    api_key: this.apiKey
+                }
+            }).then((response) => this.tvTitles = [...this.tvTitles, ...response.data.results]);
+        },
+
         // Method to access navbar menu sections
         selectSection(section) {
             this.sectionSelected = section;
@@ -70,17 +95,27 @@ const app = new Vue({
             switch(this.sectionSelected) {
                 // Home
                 case this.navSections[0]:
-                    this.trending();
+                    this.trendingWeekly();
+                break;
+
+                // Trending
+                case this.navSections[1]:
+                    this.trendingDaily();
                 break;
 
                 // Movies
-                case this.navSections[1]:
+                case this.navSections[2]:
                     this.searchPopularMovies();
                 break;
 
                 // TV series
-                case this.navSections[2]:
+                case this.navSections[3]:
                     this.searchPopularTvSeries();
+                break;
+
+                // Discover
+                case this.navSections[4]:
+                    this.discoverTitles();
                 break;
             }
         },
@@ -94,7 +129,7 @@ const app = new Vue({
         }   
     },
     mounted(){
-        // Displaying daily trending titles by default
-        this.trending();
+        // Displaying weekly trending titles by default
+        this.trendingWeekly();
     }
 });
