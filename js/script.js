@@ -1,20 +1,26 @@
 "use strict";
 
+// Re-create a Netflix-like UI with Vue.js
+
 const app = new Vue({
     el: "#app",
     data: {
         baseUrl: "https://api.themoviedb.org/3/",
         apiKey: "837fe6873adf73088b3b213a4902260e",
         userInput: "",
+        inputParams: "",
         tvTitles: [],
-        flags: ["de", "en", "es", "fr", "it", "ja", "ko", "nl", "pl", "pt", "ru", "zh"],
-        maxRating: 5,
         navSections: ["Home", "Trending", "Movies", "TV Series", "Discover"],
-        sectionSelected: "Home"
+        sectionSelected: "Home",
+        flags: ["de", "en", "es", "fr", "it", "ja", "ko", "nl", "pl", "pt", "ru", "zh"],
+        maxRating: 5
     },
     methods: {
         // Method to search Movies and TV series
         search() {
+            // Making sure no nav menu section is selected before searching 
+            this.sectionSelected = "";
+
             // Movies
             axios.get(this.baseUrl + "search/movie", {
                 params: {
@@ -35,6 +41,9 @@ const app = new Vue({
                 this.tvTitles = [...this.tvTitles, ...response.data.results];
             });
 
+            // Storing user input
+            this.inputParams = this.userInput;
+            
             // Clearing user input after searching
             this.userInput = "";
         },
@@ -86,7 +95,6 @@ const app = new Vue({
                 }
             }).then((response) => this.tvTitles = [...this.tvTitles, ...response.data.results]);
         },
-
         // Method to access navbar menu sections
         selectSection(section) {
             this.sectionSelected = section;

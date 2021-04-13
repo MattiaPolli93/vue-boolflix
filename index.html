@@ -45,36 +45,45 @@
             </div>
         </header>
 
-        <main class="flex">
-            <!-- Cards section - Movies & TV series -->
-            <div class="card-container" v-for="title in tvTitles">
-                <img class="to-hide ":src="(title.poster_path ? 'https://image.tmdb.org/t/p/w500' + title.poster_path : 'img/image-not-found.png')" :alt="title.title">
+        <main>
+            <!-- Headings -->
+            <h1 v-if="sectionSelected === 'Home'">Hot this Week</h1>
+            <h1 v-else-if="sectionSelected === 'Trending'">Trending Today</h1>
+            <h1 v-else-if="sectionSelected === 'Movies'">Popular Movies</h1>
+            <h1 v-else-if="sectionSelected === 'TV Series'">Popular TV Series</h1>
+            <h1 v-else-if="sectionSelected === 'Discover'">Discover what's New</h1>
+            <h3 v-else-if="sectionSelected === ''">Results for <span class="color-red"><em>{{inputParams}}</em></span></h3>
+            <div class="card-all-wrapper flex">
+                <!-- Cards section - Movies & TV series -->
+                <div class="card-container" v-for="title in tvTitles">
+                    <img class="to-hide ":src="(title.poster_path ? 'https://image.tmdb.org/t/p/w500' + title.poster_path : 'img/image-not-found.png')" :alt="title.title">
 
-                <!-- Card info on :hover -->
-                <div class="card-data flex">                  
-                    <!-- Title name -->
-                    <p v-if="title.original_title && title.original_title !== title.original_name"><span class="color-red">Title: </span>{{title.original_title}}</p>               
-                    <p v-else><span class="color-red">Title: </span>{{title.original_name}}</p>
-                    
-                    <!-- Flag/Language -->
-                    <div class="flag flex">
-                        <p><span class="color-red">Language: </span></p>
-                        <img v-if="flags.includes(title.original_language)" :src="displayFlags(title.original_language)" alt="Flag">
-                        <img v-else src="img/flags/image-not-found.svg" alt="Image Not Found!">
-                    </div>          
+                    <!-- Card info on :hover -->
+                    <div class="card-data flex">                  
+                        <!-- Title name -->
+                        <p v-if="title.original_title && title.original_title !== title.original_name"><span class="color-red">Title: </span>{{title.original_title}}</p>               
+                        <p v-else><span class="color-red">Title: </span>{{title.original_name}}</p>
                         
-                    <!-- Overview -->
-                    <p><span class="color-red">Synopsis: </span>{{title.overview}}</p>
-                    
-                    <!-- Rating -->
-                    <p><span class="color-red">Rating: </span><span class="stars" v-for="(rating) in maxRating">
-                        <i class="fas fa-star" v-if="rating < roundRating(title.vote_average)"></i>
-                        <i class="far fa-star" v-else></i>
-                    </span></p>
-                    
-                    <!-- Release date -->
-                    <p v-if="title.release_date && title.release_date !== title.first_air_date"><span class="color-red">Released on:</span> {{title.release_date}}</p>
-                    <p v-else><span class="color-red">Released on: </span>{{title.first_air_date}}</p>
+                        <!-- Flag/Language -->
+                        <div class="flag flex">
+                            <p><span class="color-red">Language: </span></p>
+                            <img v-if="flags.includes(title.original_language)" :src="displayFlags(title.original_language)" alt="Flag">
+                            <img v-else src="img/flags/image-not-found.svg" alt="Image Not Found!">
+                        </div>          
+                            
+                        <!-- Overview -->
+                        <p><span class="color-red">Synopsis: </span>{{title.overview}}</p>
+                        
+                        <!-- Rating -->
+                        <p><span class="color-red">Rating: </span><span class="stars" v-for="(rating) in maxRating">
+                            <i class="fas fa-star" v-if="rating < roundRating(title.vote_average)"></i>
+                            <i class="far fa-star" v-else></i>
+                        </span></p>
+                        
+                        <!-- Release date -->
+                        <p v-if="title.release_date && title.release_date !== title.first_air_date"><span class="color-red">Released on:</span> {{title.release_date}}</p>
+                        <p v-else><span class="color-red">Released on: </span>{{title.first_air_date}}</p>
+                    </div>
                 </div>
             </div>
         </main>
