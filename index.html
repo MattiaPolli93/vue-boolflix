@@ -61,8 +61,7 @@
                     <!-- Card info on :hover -->
                     <div class="card-data flex">                  
                         <!-- Title name -->
-                        <p v-if="title.original_title && title.original_title !== title.original_name"><span class="color-red">Title: </span>{{title.original_title}}</p>               
-                        <p v-else><span class="color-red">Title: </span>{{title.original_name}}</p>
+                        <p><span class="color-red">Title: </span>{{title.original_title ? title.original_title : title.original_name}}</p>
                         
                         <!-- Flag/Language -->
                         <div class="flag flex">
@@ -81,8 +80,7 @@
                         </span></p>
                         
                         <!-- Release date -->
-                        <p v-if="title.release_date && title.release_date !== title.first_air_date"><span class="color-red">Released on:</span> {{title.release_date}}</p>
-                        <p v-else><span class="color-red">Released on: </span>{{title.first_air_date}}</p>
+                        <p><span class="color-red">Released on: </span> {{title.release_date ? title.release_date : title.first_air_date}}</p>
                     </div>
                 </div>
             </div>
