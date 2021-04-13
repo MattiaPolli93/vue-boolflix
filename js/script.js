@@ -5,19 +5,16 @@ const baseUrl = "https://api.themoviedb.org/3/"
 // API Key
 const apiKey = "837fe6873adf73088b3b213a4902260e";
 // Flags
-const flagSeries = ["de", "en", "es", "fr", "it", "ja", "nl", "pl", "pt", "ru"];
+const flagSeries = ["de", "en", "es", "fr", "it", "ja", "ko", "nl", "pl", "pt", "ru", "zh"];
 
 const app = new Vue({
     el: "#app",
     data: {
         userInput: "",
         tvTitles: [],
-        flags: [...flagSeries]
+        flags: [...flagSeries],
+        maxRating: 5
     },
-    mounted(){
-        // Displaying daily trending titles by default
-        this.trending();
-        },
     methods: {
         // Method to display daily trending Movies & TV series
         trending() {
@@ -55,6 +52,14 @@ const app = new Vue({
         // Method to display flags (languages)
         displayFlags(str) {
             return `img/flags/${str}.svg`;
+        },
+        // Method to round up the original x/10 to a x/5 rating
+        roundRating(num) {
+            return num = Math.ceil(num / 2);
         }
-    }
+    },
+    mounted(){
+        // Displaying daily trending titles by default
+        this.trending();
+    },
 });

@@ -9,26 +9,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous"/>
-    <!-- Main style -->
-    <link rel="stylesheet" href="css/style.css">
     <!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Main style -->
+    <link rel="stylesheet" href="css/style.css">
     <title>Boolflix</title>
 </head>
 <body>
     <div id="app" class="wrapper">
         <header class="flex">
-            <!-- Logo -->
-            <div class="logo-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Logo Image">
+            <!-- Navbar -->
+            <div class="left-nav flex">
+                <!-- Logo -->
+                <div class="logo-container">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Logo Image">
+                </div>
+                <!-- Nav -->
+                <ul class="flex">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">TV Series</a></li>
+                    <li><a href="#" @click="trending()">Latest</a></li>
+                </ul>
             </div>
 
             <!-- Search-bar -->
-            <div class="input-button-container flex">
+            <div class="right-nav flex">
                 <input type="text" placeholder="Search" v-model="userInput" @keyup.enter="search()">
                 <button @click="search()"><i class="far fa-arrow-alt-circle-right"></i></button>
+                <i class="far fa-bell"></i>
+                <i class="fas fa-caret-down"></i>
             </div>
         </header>
 
@@ -54,7 +66,10 @@
                     <p><span class="color-red">Synopsis: </span>{{title.overview}}</p>
                     
                     <!-- Rating -->
-                    <p><span class="color-red">Rating: </span>{{title.vote_average}}</p>
+                    <p><span class="color-red">Rating: </span><span class="stars" v-for="(rating) in maxRating">
+                        <i class="fas fa-star" v-if="rating < roundRating(title.vote_average)"></i>
+                        <i class="far fa-star" v-else></i>
+                    </span></p>
                     
                     <!-- Release date -->
                     <p v-if="title.release_date && title.release_date !== title.first_air_date"><span class="color-red">Released on:</span> {{title.release_date}}</p>

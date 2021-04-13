@@ -33,47 +33,91 @@ header {
 }
 
 .logo-container img {
-    height: 55px;
+    height: 45px;
+    margin-right: 50px;
 }
 
-.input-button-container {
+/* Left nav */
+.left-nav {
+    text-transform: uppercase;
+    align-items: center;
+}
+
+.left-nav ul li {
+    list-style: none;
+    margin: 0 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.left-nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* TODO */
+.left-nav ul li:first-child a {
+    color: #ff0000;
+}
+
+/* Input search */
+.right-nav {
     justify-content: space-between;
-    width: 15%;
+    align-items: center;
+    width: 25%;
 }
 
-.input-button-container input {
+.right-nav input {
+    width: 60%;
+    height: 35px;
     padding-left: 10px;
     border-radius: 20px;
     border-color: #ff3838;
 }
 
-.input-button-container input:focus {
+.right-nav input:focus {
     border-color: #ff0000;
     outline: none;
 }
 
-.input-button-container button {
+.right-nav button {
     width: 40px;
     height: 40px;
     border-radius: 20px;
     border: none;
+    margin: 0 40px 0 5px;
 }
 
-.input-button-container button i {
+.right-nav input,
+.right-nav button {
+    color: #fff;
+    background-color: #000;
+}
+
+.right-nav i {
     color: #ff0000;
     font-size: 40px;
-    transition: 0.8s;
+    transition: 0.3s;
+    cursor: pointer;
 }
 
-.input-button-container button i:hover {
+.right-nav i.fa-arrow-alt-circle-right:hover {
+    color: #fff;
+    transform: rotate(360deg);
+}
+
+.right-nav i.fa-arrow-alt-circle-right:active {
     transform: scale(1.5);
 }
 
-.input-button-container input,
-.input-button-container button {
-    color: #fff;
-    background-color: #000;
-    cursor: pointer;
+.right-nav i:not(:first-child) {
+    color: #ffe2e2;
+    font-size: 30px;
+}
+
+.right-nav i:last-child {
+    margin-left: 10px;
 }
 
 /* Main */
@@ -84,6 +128,7 @@ main {
     padding: 15px 30px 10px;
 }
 
+/* Cards */
 .card-container {
     position: relative;
     width: 290px;
@@ -128,6 +173,11 @@ main {
     overflow-y: auto;
 }
 
+.card-data p {
+    margin: 5px 0;
+}
+
+/* Language */
 .flag {
     align-items: center;
     width: 100%;
@@ -139,6 +189,9 @@ main {
     height: 30px;
 }
 
-.card-data p {
-    margin: 5px 0;
+/* Rating */
+.stars {
+    color: #ffc117;
+    font-size: 20px;
+    text-shadow: 1px 1px 4px #ffc117;
 }
