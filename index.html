@@ -31,7 +31,7 @@
                 <!-- Sections nav -->
                 <ul class="flex">
                     <li v-for="(section) in navSections" @click="selectSection(section)">
-                        <a href="#">{{section}}</a>
+                        <a :class="{selected: sectionSelected === section}" href="#">{{section}}</a>
                     </li>
                 </ul>
             </div>
