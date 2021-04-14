@@ -276,3 +276,109 @@ main {
 .page-container p {
     margin: 0 40px;
 }
+
+/* Responsive */
+@media screen and (max-width: 1490px) {
+    .headings {
+        margin: 0 140px;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .logo-container img {
+        height: 50px;
+        margin-right: 15px;
+    }
+
+    .left-nav ul li {
+        font-size: 15px;
+    }
+
+    .right-nav {
+        width: 30%;
+    }
+
+    .headings {
+        margin: 0 25px;
+    }
+
+    .card-container {
+        width: 20%;
+        height: 45vh;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .left-nav ul {
+        display: none;
+    }
+
+    .right-nav {
+        justify-content: flex-end;
+        width: 50%;
+    }
+
+    .right-nav button {
+        margin-right: 10px;
+    }
+
+    .right-nav i.far,
+    .right-nav i.fas {
+        font-size: 25px;
+    }
+
+    .headings {
+        margin: 0;
+    }
+
+    .card-container {
+        width: 45%;
+        height: 65vh;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .headings {
+        margin: 0 30px;
+        align-items: center;
+    }
+
+    .headings h1 {
+        font-size: 25px;
+    }
+
+    .headings .pages i {
+        font-size: 30px;
+    }
+
+    .card-container {
+        width: 75%;
+        height: 80vh;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .headings {
+        margin-left: 45px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .headings h1 {
+        font-size: 40px;
+    }
+
+    .headings h1,
+    .headings h3 {
+        margin-left: 0;
+    }
+
+    .headings .pages i {
+        display: none;
+    }
+
+    .card-container {
+        width: 80%;
+        height: 70vh;
+    }
+}
