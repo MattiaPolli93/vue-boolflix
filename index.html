@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Favicon -->
-    <link rel="shortcut icon" href="img/logo_boolflix.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/logo_boolflix.ico" type="image/x-icon">
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
@@ -21,6 +21,7 @@
 </head>
 <body>
     <div id="app" class="wrapper">
+        
         <header class="flex">
             <!-- Navbar -->
             <div class="left-nav flex">
@@ -28,6 +29,7 @@
                 <div class="logo-container">
                     <img src="img/boolflix.png" alt="Logo Image">
                 </div>
+                
                 <!-- Sections nav -->
                 <ul class="flex">
                     <li v-for="(section) in navSections" @click="selectSection(section)">
@@ -46,13 +48,23 @@
         </header>
 
         <main>
-            <!-- Headings -->
-            <h1 v-if="sectionSelected === 'Home'">Hot this Week</h1>
-            <h1 v-else-if="sectionSelected === 'Trending'">Trending Today</h1>
-            <h1 v-else-if="sectionSelected === 'Movies'">Popular Movies</h1>
-            <h1 v-else-if="sectionSelected === 'TV Series'">Popular TV Series</h1>
-            <h1 v-else-if="sectionSelected === 'Discover'">Discover what's New</h1>
-            <h3 v-else-if="sectionSelected === ''">Results for <span class="color-red"><em>{{inputParams}}</em></span></h3>
+            <!-- Headings & Prev/Next page -->
+            <div class="headings flex">
+                <!-- Headings -->
+                <h1 v-if="sectionSelected === 'Home'">Hot this Week</h1>
+                <h1 v-else-if="sectionSelected === 'Trending'">Trending Today</h1>
+                <h1 v-else-if="sectionSelected === 'Movies'">Popular Movies</h1>
+                <h1 v-else-if="sectionSelected === 'TV Series'">Popular TV Series</h1>
+                <h1 v-else-if="sectionSelected === 'Discover'">Discover what's New</h1>
+                <h3 v-else-if="sectionSelected === ''">Results for <span class="color-red"><em>{{inputParams}}</em></span></h3>
+
+                <!-- Prev/Next pages -->
+                <div class="pages flex" v-if="sectionSelected !== ''">
+                    <i class="fas fa-caret-left" @click="prevPage(sectionSelected)"></i>
+                    <i class="fas fa-caret-right" @click="nextPage(sectionSelected)"></i>
+                </div>
+            </div>
+
             <div class="card-all-wrapper flex">
                 <!-- Cards section - Movies & TV series -->
                 <div class="card-container" v-for="title in tvTitles">
@@ -83,6 +95,15 @@
                         <p><span class="color-red">Released on: </span> {{title.release_date ? title.release_date : title.first_air_date}}</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- Prev/Next pages (bottom) -->
+            <div class="pages flex" v-if="sectionSelected !== ''">
+                <i class="fas fa-chevron-left" @click="prevPage(sectionSelected)"></i>
+                <div class="page-container flex">
+                    <p class="color-red">{{pagesIndex}}</p>
+                </div>
+                <i class="fas fa-chevron-right" @click="nextPage(sectionSelected)"></i>
             </div>
         </main>
     </div>
